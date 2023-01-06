@@ -2,7 +2,7 @@ import { View, Text, TextInput, StyleSheet, TouchableOpacity, ScrollView} from '
 import React, {useState} from 'react';
 
 const CalculoColheitaForm = () => {
-    const [texTempo, onChangeTextTempo] = useState('');
+    const [textTempo, onChangeTextTempo] = useState('');
     const [textTma, onChangeTextTma] = useState('');
     const [textQtdColhedoras, onChangeTextQtdColhedoras] = useState('');
     const [textDensidade, onChangeTexDensidade] = useState('');
@@ -10,6 +10,9 @@ const CalculoColheitaForm = () => {
     const [producaoPorColhedoraHora, setProducaoPorColhedoraHora] = useState('');
     const [producaoDaFrente, setProducaoDaFrente] = useState('');
     const [producaoCaminhaoPorHora, setProducaoCaminhaoPorHora] = useState('');
+
+    var producaoFrente = calcularProducaoDaFrente();
+
 
     const changeProducaoPorColhedoraHora = () => {
         setProducaoPorColhedoraHora(calcularProducaoPorColhedoraHora());
@@ -24,36 +27,39 @@ const CalculoColheitaForm = () => {
     }
 
     function calcularProducaoPorColhedoraHora() {
-        if(texTempo != '' & textTma != '' && textQtdColhedoras != '' && textDensidade != '' && textQtdReboques != '') {
+        if(textTempo != '' & textTma != '' && textQtdColhedoras != '' && textDensidade != '' && textQtdReboques != '') {
             let resultProducaoPorColhedoraHora;
-            resultProducaoPorColhedoraHora = ((textTma * 60) / texTempo);
-            return 'Produção colhedora: ' + resultProducaoPorColhedoraHora.toFixed(2) + ' ton/hora'
+            let tma = textTma.replace(',', '.');
+            let tempo = textTempo.replace(',', '.');
+            resultProducaoPorColhedoraHora = ((tma * 60) / tempo);
+            return 'Produção colhedora ton/hora: ' + resultProducaoPorColhedoraHora.toFixed(1);
         }else{
             return 'Preencha todos os campos'
         }
     }
 
     function calcularProducaoDaFrente() {
-        if(texTempo != '' & textTma != '' && textQtdColhedoras != '' && textDensidade != '' && textQtdReboques != '') {
+        if(textTempo != '' & textTma != '' && textQtdColhedoras != '' && textDensidade != '' && textQtdReboques != '') {
+            let tma = textTma.replace(',', '.');
+            let tempo = textTempo.replace(',', '.');
+            let QtdColhedora = textQtdColhedoras.replace(',', '.');
             let resultcalcularProducaoDaFrente;
-            resultcalcularProducaoDaFrente = ((textTma * 60) / texTempo) * textQtdColhedoras;
-            return 'Produção frente: ' + resultcalcularProducaoDaFrente.toFixed(2) + ' ton/hora';
+            resultcalcularProducaoDaFrente = ((tma * 60) / tempo) * QtdColhedora;
+            return 'Produção frente ton/hora: ' + resultcalcularProducaoDaFrente.toFixed(1);
         }else{
             return '';
         }
     }
 
     function calcularProducaoCaminhaoPorHora() {
-        if(texTempo != '' & textTma != '' && textQtdColhedoras != '' && textDensidade != '' && textQtdReboques != '') {
+        if(textTempo != '' & textTma != '' && textQtdColhedoras != '' && textDensidade != '' && textQtdReboques != '') {
             let resultcalcularProducaoCaminhaoPorHora;
-            let densidade = textDensidade * textQtdReboques;
-            let producaoFrente;
-            producaoFrente = producaoDaFrente.replace('Produção frente: ', '');
-            producaoFrente = producaoFrente.replace(' ton/hora', '');
-            console.log(densidade);
-            resultcalcularProducaoCaminhaoPorHora =   producaoFrente / densidade;
-            console.log(producaoFrente);
-            return 'Quantidade caminhão: ' + resultcalcularProducaoCaminhaoPorHora.toFixed(2) + ' cam/hora';
+            let densidade = textDensidade.replace(',', '.');
+            let qtdReboques = textQtdReboques.replace(',', '.');
+            let resultDensidade = densidade * qtdReboques;
+            producaoFrente = producaoFrente.replace('Produção frente ton/hora: ', '');
+            resultcalcularProducaoCaminhaoPorHora =   producaoFrente / resultDensidade;
+            return 'Quantidade caminhão cam/hora: ' + resultcalcularProducaoCaminhaoPorHora.toFixed(1);
         }else{
             return '';
         }
@@ -65,10 +71,11 @@ const CalculoColheitaForm = () => {
         <TextInput 
             style={styles.inputForm}
             onChangeText={onChangeTextTempo}
-            value={texTempo}
+            value={textTempo}
             placeholder=""
-            keyboardType="numeric"
+            keyboardType="decimal-pad"
             maxLength={20}
+            autoCapitalize="none"
         />
         <Text style={styles.labelInput}>Capacidade do TMA em(ton): </Text>
         <TextInput 
@@ -78,6 +85,7 @@ const CalculoColheitaForm = () => {
             placeholder=""
             keyboardType="numeric"
             maxLength={20}
+            autoCapitalize="none"
         />
         <Text style={styles.labelInput}>Quantidade de colhedora na frente: </Text>
         <TextInput 
@@ -87,6 +95,7 @@ const CalculoColheitaForm = () => {
             placeholder=""
             keyboardType="numeric"
             maxLength={20}
+            autoCapitalize="none"
         />
         <View style={styles.containerInput}>
             <View style={{marginRight: '3%', width:'60%'}}>
@@ -98,6 +107,7 @@ const CalculoColheitaForm = () => {
                     placeholder=""
                     keyboardType="numeric"
                     maxLength={20}
+                    autoCapitalize="none"
                 />
             </View>
             <View style={{width: '37%'}}>
@@ -109,6 +119,7 @@ const CalculoColheitaForm = () => {
                     placeholder=""
                     keyboardType="numeric"
                     maxLength={20}
+                    autoCapitalize="none"
                 />
             </View>
         </View>
