@@ -73,13 +73,14 @@ const CalculoColheitaForm = () => {
     var producaoColhedora = calcularProducaoCdTotal();
     var producaoTransbordo = calcularProducaoTtTotal();
 
-
     function calcularEntregaCamHora(){
         producaoColhedora = producaoColhedora.replace('Prod. CD total ton/hora: ', '');
         producaoTransbordo = producaoTransbordo.replace('Prod. TT total ton/hora: ', '');
         if(textTempoColhedora != '' && textTempoTransbordo != '' && textTma != '' && textQtdColhedoras != '' && textQtdTransbordos != '' && textDensidade != '' && textQtdReboques != '') {
             let limitante;
             let resultLimitante;
+            producaoColhedora = parseFloat(producaoColhedora);
+            producaoTransbordo = parseFloat(producaoTransbordo);
             if(producaoColhedora < producaoTransbordo){
                 limitante = producaoColhedora;
             }else if(producaoColhedora > producaoTransbordo){
@@ -87,9 +88,6 @@ const CalculoColheitaForm = () => {
                 }else{
                     limitante = producaoColhedora;
                 }
-                console.log(textDensidade);
-                console.log(textQtdReboques);
-                console.log(limitante);
                 resultLimitante = (limitante/(textDensidade * textQtdReboques));
             return 'Entrega cam/h: ' + resultLimitante.toFixed(1);
         }else{
