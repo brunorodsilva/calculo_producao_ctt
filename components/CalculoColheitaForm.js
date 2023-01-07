@@ -33,7 +33,22 @@ const CalculoColheitaForm = () => {
 
 
     function calcularproducaoCdMediaHora() {
-        if(textTempoColhedora != '' && textTempoTransbordo != '' && textTma != '' && textQtdColhedoras != '' && textQtdTransbordos != '' && textDensidade != '' && textQtdReboques != '') {
+        if(
+            textTempoColhedora != '' &&
+            textTempoColhedora != '0' &&
+            textTempoTransbordo != '' &&
+            textTempoTransbordo != '0' &&
+            textTma != '' &&
+            textTma != '0' &&
+            textQtdColhedoras != '' &&
+            textQtdColhedoras != '0' &&
+            textQtdTransbordos != '' &&
+            textQtdTransbordos != '0' &&
+            textDensidade != '' &&
+            textDensidade != '0' &&
+            textQtdReboques != '' &&
+            textQtdReboques != '0'
+        ) {
             let resultproducaoCdMediaHora;
             let tma = textTma.replace(',', '.');
             let tempo = textTempoColhedora.replace(',', '.');
@@ -45,7 +60,22 @@ const CalculoColheitaForm = () => {
     }
 
     function calcularProducaoCdTotal() {
-        if(textTempoColhedora != '' && textTempoTransbordo != '' && textTma != '' && textQtdColhedoras != '' && textQtdTransbordos != '' && textDensidade != '' && textQtdReboques != '') {
+        if(
+            textTempoColhedora != '' &&
+            textTempoColhedora != '0' &&
+            textTempoTransbordo != '' &&
+            textTempoTransbordo != '0' &&
+            textTma != '' &&
+            textTma != '0' &&
+            textQtdColhedoras != '' &&
+            textQtdColhedoras != '0' &&
+            textQtdTransbordos != '' &&
+            textQtdTransbordos != '0' &&
+            textDensidade != '' &&
+            textDensidade != '0' &&
+            textQtdReboques != '' &&
+            textQtdReboques != '0'
+        ) {
             let tma = textTma.replace(',', '.');
             let tempo = textTempoColhedora.replace(',', '.');
             let QtdColhedora = textQtdColhedoras.replace(',', '.');
@@ -58,7 +88,22 @@ const CalculoColheitaForm = () => {
     }
 
     function calcularProducaoTtTotal() {
-        if(textTempoColhedora != '' && textTempoTransbordo != '' && textTma != '' && textQtdColhedoras != '' && textQtdTransbordos != '' && textDensidade != '' && textQtdReboques != '') {
+        if(
+            textTempoColhedora != '' &&
+            textTempoColhedora != '0' &&
+            textTempoTransbordo != '' &&
+            textTempoTransbordo != '0' &&
+            textTma != '' &&
+            textTma != '0' &&
+            textQtdColhedoras != '' &&
+            textQtdColhedoras != '0' &&
+            textQtdTransbordos != '' &&
+            textQtdTransbordos != '0' &&
+            textDensidade != '' &&
+            textDensidade != '0' &&
+            textQtdReboques != '' &&
+            textQtdReboques != '0'
+        ) {
             let tma = textTma.replace(',', '.');
             let tempo = textTempoTransbordo.replace(',', '.');
             let QtdTransbordos = textQtdTransbordos.replace(',', '.');
@@ -76,7 +121,22 @@ const CalculoColheitaForm = () => {
     function calcularEntregaCamHora(){
         producaoColhedora = producaoColhedora.replace('Prod. CD total ton/hora: ', '');
         producaoTransbordo = producaoTransbordo.replace('Prod. TT total ton/hora: ', '');
-        if(textTempoColhedora != '' && textTempoTransbordo != '' && textTma != '' && textQtdColhedoras != '' && textQtdTransbordos != '' && textDensidade != '' && textQtdReboques != '') {
+        if(
+            textTempoColhedora != '' &&
+            textTempoColhedora != '0' &&
+            textTempoTransbordo != '' &&
+            textTempoTransbordo != '0' &&
+            textTma != '' &&
+            textTma != '0' &&
+            textQtdColhedoras != '' &&
+            textQtdColhedoras != '0' &&
+            textQtdTransbordos != '' &&
+            textQtdTransbordos != '0' &&
+            textDensidade != '' &&
+            textDensidade != '0' &&
+            textQtdReboques != '' &&
+            textQtdReboques != '0'
+        ) {
             let limitante;
             let resultLimitante;
             producaoColhedora = parseFloat(producaoColhedora);
