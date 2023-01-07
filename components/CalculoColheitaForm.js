@@ -2,64 +2,96 @@ import { View, Text, TextInput, StyleSheet, TouchableOpacity, ScrollView} from '
 import React, {useState} from 'react';
 
 const CalculoColheitaForm = () => {
-    const [textTempo, onChangeTextTempo] = useState('');
+    const [textTempoColhedora, onChangeTextTempoColhedora] = useState('');
+    const [textTempoTransbordo, onChangeTextTempoTransbordo] = useState('');
     const [textTma, onChangeTextTma] = useState('');
     const [textQtdColhedoras, onChangeTextQtdColhedoras] = useState('');
+    const [textQtdTransbordos, onChangeTextQtdTransbordos] = useState('');
     const [textDensidade, onChangeTexDensidade] = useState('');
     const [textQtdReboques, onChangeTextQtdReboques] = useState('');
-    const [producaoPorColhedoraHora, setProducaoPorColhedoraHora] = useState('');
-    const [producaoDaFrente, setProducaoDaFrente] = useState('');
-    const [producaoCaminhaoPorHora, setProducaoCaminhaoPorHora] = useState('');
+    const [producaoCdMediaHora, setProducaoCdMediaHora] = useState('');
+    const [producaoCdTotal, setProducaoCdTotal] = useState('');
+    const [producaoTtTotal, setProducaoTtTotal] = useState('');
+    const [entregaCamHora, setEntregaCamHora] = useState('');
 
-    var producaoFrente = calcularProducaoDaFrente();
 
-
-    const changeProducaoPorColhedoraHora = () => {
-        setProducaoPorColhedoraHora(calcularProducaoPorColhedoraHora());
+    const changeProducaoCdMediaHora = () => {
+        setProducaoCdMediaHora(calcularproducaoCdMediaHora());
     }
 
-    const changeProducaoDaFrente = () => {
-        setProducaoDaFrente(calcularProducaoDaFrente());
+    const changeProducaoCdTotal = () => {
+        setProducaoCdTotal(calcularProducaoCdTotal());
     }
 
-    const changeProducaoCaminhaoPorHora = () => {
-        setProducaoCaminhaoPorHora(calcularProducaoCaminhaoPorHora());
+    const changeProducaoTtTotal = () => {
+        setProducaoTtTotal(calcularProducaoTtTotal());
     }
 
-    function calcularProducaoPorColhedoraHora() {
-        if(textTempo != '' & textTma != '' && textQtdColhedoras != '' && textDensidade != '' && textQtdReboques != '') {
-            let resultProducaoPorColhedoraHora;
+    const changeEntregaCamHora = () => {
+        setEntregaCamHora(calcularEntregaCamHora());
+    }
+
+
+    function calcularproducaoCdMediaHora() {
+        if(textTempoColhedora != '' && textTempoTransbordo != '' && textTma != '' && textQtdColhedoras != '' && textQtdTransbordos != '' && textDensidade != '' && textQtdReboques != '') {
+            let resultproducaoCdMediaHora;
             let tma = textTma.replace(',', '.');
-            let tempo = textTempo.replace(',', '.');
-            resultProducaoPorColhedoraHora = ((tma * 60) / tempo);
-            return 'Produção colhedora ton/hora: ' + resultProducaoPorColhedoraHora.toFixed(1);
+            let tempo = textTempoColhedora.replace(',', '.');
+            resultproducaoCdMediaHora = ((tma * 60) / tempo);
+            return 'Prod. CD média ton/hora: ' + resultproducaoCdMediaHora.toFixed(1);
         }else{
             return 'Preencha todos os campos'
         }
     }
 
-    function calcularProducaoDaFrente() {
-        if(textTempo != '' & textTma != '' && textQtdColhedoras != '' && textDensidade != '' && textQtdReboques != '') {
+    function calcularProducaoCdTotal() {
+        if(textTempoColhedora != '' && textTempoTransbordo != '' && textTma != '' && textQtdColhedoras != '' && textQtdTransbordos != '' && textDensidade != '' && textQtdReboques != '') {
             let tma = textTma.replace(',', '.');
-            let tempo = textTempo.replace(',', '.');
+            let tempo = textTempoColhedora.replace(',', '.');
             let QtdColhedora = textQtdColhedoras.replace(',', '.');
-            let resultcalcularProducaoDaFrente;
-            resultcalcularProducaoDaFrente = ((tma * 60) / tempo) * QtdColhedora;
-            return 'Produção frente ton/hora: ' + resultcalcularProducaoDaFrente.toFixed(1);
+            let resultCalcularProducaoTtTotal;
+            resultCalcularProducaoTtTotal = ((tma * 60) / tempo) * QtdColhedora;
+            return 'Prod. CD total ton/hora: ' + resultCalcularProducaoTtTotal.toFixed(1);
         }else{
             return '';
         }
     }
 
-    function calcularProducaoCaminhaoPorHora() {
-        if(textTempo != '' & textTma != '' && textQtdColhedoras != '' && textDensidade != '' && textQtdReboques != '') {
-            let resultcalcularProducaoCaminhaoPorHora;
-            let densidade = textDensidade.replace(',', '.');
-            let qtdReboques = textQtdReboques.replace(',', '.');
-            let resultDensidade = densidade * qtdReboques;
-            producaoFrente = producaoFrente.replace('Produção frente ton/hora: ', '');
-            resultcalcularProducaoCaminhaoPorHora =   producaoFrente / resultDensidade;
-            return 'Quantidade caminhão cam/hora: ' + resultcalcularProducaoCaminhaoPorHora.toFixed(1);
+    function calcularProducaoTtTotal() {
+        if(textTempoColhedora != '' && textTempoTransbordo != '' && textTma != '' && textQtdColhedoras != '' && textQtdTransbordos != '' && textDensidade != '' && textQtdReboques != '') {
+            let tma = textTma.replace(',', '.');
+            let tempo = textTempoTransbordo.replace(',', '.');
+            let QtdTransbordos = textQtdTransbordos.replace(',', '.');
+            let resultCalcularProducaoTtTotal;
+            resultCalcularProducaoTtTotal = ((tma * 60) / tempo) * QtdTransbordos;
+            return 'Prod. TT total ton/hora: ' + resultCalcularProducaoTtTotal.toFixed(1);
+        }else{
+            return '';
+        }
+    }
+
+    var producaoColhedora = calcularProducaoCdTotal();
+    var producaoTransbordo = calcularProducaoTtTotal();
+
+
+    function calcularEntregaCamHora(){
+        producaoColhedora = producaoColhedora.replace('Prod. CD total ton/hora: ', '');
+        producaoTransbordo = producaoTransbordo.replace('Prod. TT total ton/hora: ', '');
+        if(textTempoColhedora != '' && textTempoTransbordo != '' && textTma != '' && textQtdColhedoras != '' && textQtdTransbordos != '' && textDensidade != '' && textQtdReboques != '') {
+            let limitante;
+            let resultLimitante;
+            if(producaoColhedora < producaoTransbordo){
+                limitante = producaoColhedora;
+            }else if(producaoColhedora > producaoTransbordo){
+                limitante = producaoTransbordo;
+                }else{
+                    limitante = producaoColhedora;
+                }
+                console.log(textDensidade);
+                console.log(textQtdReboques);
+                console.log(limitante);
+                resultLimitante = (limitante/(textDensidade * textQtdReboques));
+            return 'Entrega cam/h: ' + resultLimitante.toFixed(1);
         }else{
             return '';
         }
@@ -67,16 +99,32 @@ const CalculoColheitaForm = () => {
 
   return (
     <ScrollView style={styles.container}>
-        <Text style={styles.labelInput}>Tempo de colheita(min): </Text>
-        <TextInput 
-            style={styles.inputForm}
-            onChangeText={onChangeTextTempo}
-            value={textTempo}
-            placeholder=""
-            keyboardType="decimal-pad"
-            maxLength={20}
-            autoCapitalize="none"
-        />
+        <View style={styles.containerInput}>
+            <View style={{width: '48.5%'}}>
+                <Text style={styles.labelInput}>Tempo de CD (min): </Text>
+                <TextInput 
+                    style={styles.inputForm}
+                    onChangeText={onChangeTextTempoColhedora}
+                    value={textTempoColhedora}
+                    placeholder=""
+                    keyboardType="decimal-pad"
+                    maxLength={20}
+                    autoCapitalize="none"
+                />
+            </View>
+            <View style={{width:'48.5%'}}>
+                <Text style={styles.labelInput}>Tempo TT (min): </Text>
+                <TextInput 
+                    style={styles.inputForm}
+                    onChangeText={onChangeTextTempoTransbordo}
+                    value={textTempoTransbordo}
+                    placeholder=""
+                    keyboardType="decimal-pad"
+                    maxLength={20}
+                    autoCapitalize="none"
+                />
+            </View>
+        </View>
         <Text style={styles.labelInput}>Capacidade do TMA em(ton): </Text>
         <TextInput 
             style={styles.inputForm}
@@ -87,18 +135,34 @@ const CalculoColheitaForm = () => {
             maxLength={20}
             autoCapitalize="none"
         />
-        <Text style={styles.labelInput}>Quantidade de colhedora na frente: </Text>
-        <TextInput 
-            style={styles.inputForm}
-            onChangeText={onChangeTextQtdColhedoras}
-            value={textQtdColhedoras}
-            placeholder=""
-            keyboardType="numeric"
-            maxLength={20}
-            autoCapitalize="none"
-        />
         <View style={styles.containerInput}>
-            <View style={{marginRight: '3%', width:'60%'}}>
+            <View style={{width:'48.5%'}}>
+                <Text style={styles.labelInput}>Qtd CD na frente: </Text>
+                <TextInput 
+                    style={styles.inputForm}
+                    onChangeText={onChangeTextQtdColhedoras}
+                    value={textQtdColhedoras}
+                    placeholder=""
+                    keyboardType="numeric"
+                    maxLength={20}
+                    autoCapitalize="none"
+                />
+            </View>
+            <View style={{width:'48.5%'}}>
+                <Text style={styles.labelInput}>Qtd TT na frente: </Text>
+                    <TextInput 
+                        style={styles.inputForm}
+                        onChangeText={onChangeTextQtdTransbordos}
+                        value={textQtdTransbordos}
+                        placeholder=""
+                        keyboardType="numeric"
+                        maxLength={20}
+                        autoCapitalize="none"
+                    />
+            </View>
+        </View>
+        <View style={styles.containerInput}>
+            <View style={{width:'48.5%'}}>
                 <Text style={styles.labelInput}>Densidade de carga: </Text>
                 <TextInput 
                     style={styles.inputForm}
@@ -110,7 +174,7 @@ const CalculoColheitaForm = () => {
                     autoCapitalize="none"
                 />
             </View>
-            <View style={{width: '37%'}}>
+            <View style={{width: '48.5%'}}>
                 <Text style={styles.labelInput}>Qtd reboques: </Text>
                 <TextInput 
                     style={styles.inputForm}
@@ -123,33 +187,42 @@ const CalculoColheitaForm = () => {
                 />
             </View>
         </View>
-        <View style={styles.result}>
-            <Text 
-                style={styles.textResult}>
-                {producaoPorColhedoraHora}
-            </Text>
-            <Text style={styles.textResult}>
-                {producaoDaFrente}
-            </Text>
-            <Text style={styles.textResult}>
-                {producaoCaminhaoPorHora}
-            </Text>
+        <View style={styles.containerResult}>
+            <Text style={{fontSize: 18, fontWeight: 'bold'}}>Resultados: </Text>
+            <View style={styles.result}>
+                <Text 
+                    style={styles.textResult}>
+                    {producaoCdMediaHora}
+                </Text>
+                <Text style={styles.textResult}>
+                    {producaoCdTotal}
+                </Text>
+                <Text style={styles.textResult}>
+                    {producaoTtTotal}
+                </Text>
+                <Text style={{fontSize: 20, fontWeight: '700', color: '#2d6035', marginBottom: '2%'}}>
+                    {entregaCamHora}
+                </Text>
+            </View>
         </View>
         <TouchableOpacity 
           style={styles.button}
-          onPress={() => {changeProducaoPorColhedoraHora(), changeProducaoDaFrente(), changeProducaoCaminhaoPorHora()}}
+          onPress={() => {changeProducaoCdMediaHora() ,changeProducaoCdTotal(), changeProducaoTtTotal(), changeEntregaCamHora()}}
         >
             <Text style={{color: '#fff', fontWeight: '700', fontSize: 18}}>CALCULAR</Text>
         </TouchableOpacity>
         <TouchableOpacity 
           style={styles.button}
           onPress={() => {
-            setProducaoPorColhedoraHora('')
-            setProducaoDaFrente('')
-            setProducaoCaminhaoPorHora('')
-            onChangeTextTempo('')
-            onChangeTextTma('')
+            setProducaoCdMediaHora('')
+            setProducaoCdTotal('')
+            setProducaoTtTotal('')
+            setEntregaCamHora('')
+            onChangeTextTempoColhedora('')
+            onChangeTextTempoTransbordo('')
+            onChangeTextTma('')/
             onChangeTextQtdColhedoras('')
+            onChangeTextQtdTransbordos('')
             onChangeTexDensidade('')
             onChangeTextQtdReboques('')
         }}
@@ -170,6 +243,7 @@ container:{
 
 containerInput: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
     width: '100%',
 },
 
@@ -191,18 +265,29 @@ inputForm: {
   labelInput: {
     fontSize: 14,
     fontWeight: 'bold',
-    marginBottom: 5,
+    marginBottom: 2,
   },
 
   result: {
-    marginVertical: '3%'
+    marginVertical: '1%'
   },
 
   textResult: {
     fontSize: 16,
     fontWeight: '700',
-    marginBottom: '2%',
+    marginBottom: '1%',
     color: '#2d6035',
+  },
+
+  containerResult: {
+    width: '100%',
+    height: '28%',
+    backgroundColor: '#dffae1',
+    borderRadius: 8,
+    paddingHorizontal: '2%',
+    paddingVertical: '2%',
+    marginTop: '2%',
+    marginBottom: '5%',
   },
 
   button: {

@@ -4,7 +4,7 @@ import React from 'react'
 const CalculoColheitaTitle = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Forneça os dados para obter a produção por hora:</Text>
+      <Text style={styles.title}>Forneça os dados abaixo: </Text>
     </View>
   )
 }

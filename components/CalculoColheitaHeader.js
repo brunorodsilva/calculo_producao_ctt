@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     containerHeader: {
         backgroundColor: '#2d6035',
         width: '100%',
-        height: 65,
+        height: 60,
         justifyContent: 'center',
         paddingHorizontal: '3%',
     }
